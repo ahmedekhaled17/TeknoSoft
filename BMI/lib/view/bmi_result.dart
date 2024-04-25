@@ -1,3 +1,5 @@
+import 'package:bmi/widgets/couhmn_items.dart';
+import 'package:bmi/widgets/custom_button.dart';
 import 'package:bmi/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -11,14 +13,16 @@ class BmiResultScreen extends StatelessWidget {
   final String status;
 
   final String range;
-  const BmiResultScreen(
-      {super.key,
-        required this.result,
-        required this.isMale,
-        required this.age,
-        required this.height,
-        required this.weight,
-        required this.status, required this.range,});
+  const BmiResultScreen({
+    super.key,
+    required this.result,
+    required this.isMale,
+    required this.age,
+    required this.height,
+    required this.weight,
+    required this.status,
+    required this.range,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +37,12 @@ class BmiResultScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(right: 8,bottom: 8,left: 8),
+        padding: const EdgeInsets.only(right: 8, bottom: 8, left: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Padding(
-              padding: EdgeInsets.only(right: 15,bottom: 15,left: 15),
+              padding: EdgeInsets.only(right: 15, bottom: 15, left: 15),
               child: CustomText(
                 color: Colors.black,
                 text: "Result",
@@ -61,20 +65,20 @@ class BmiResultScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.blue,
                 ),
-                child:  Padding(
+                child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
                       CustomText(
-                    text:'$result',
-                          color: Colors.white,
+                        text: '$result',
+                        color: Colors.white,
                         fontSize: 25,
-                        ),
+                      ),
                       const CustomText(
                         text: 'kg/m2 ',
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                        color: Colors.white,
+                        fontSize: 20,
+                      ),
                     ],
                   ),
                 ),
@@ -83,9 +87,10 @@ class BmiResultScreen extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-             Center(
-                child: Text('($status)',
-              style:const TextStyle(fontWeight: FontWeight.bold),
+            Center(
+                child: Text(
+              '($status)',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             )),
             const SizedBox(
               height: 20,
@@ -102,79 +107,45 @@ class BmiResultScreen extends StatelessWidget {
                   ),
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      children: [
-                        Icon( isMale?
-                          FontAwesomeIcons.person :FontAwesomeIcons.personDress ,
-                          size: 30,
-                         // color: Colors.purple,
-                        ),
-                        const  SizedBox(
-                          height: 5,
-                        ),
-                         Text(
-                          isMale ? "Male" :"Female",
-                          style: const TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),Column(
-                      children: [
-                        Text(
-                         '$age',style:const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                         const Text(
-                          'Age',
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),Column(
-                      children: [
-                        Text("$height",style:const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600),),
-                        const  SizedBox(
-                          height: 5,
-                        ),
-                        const Text(
-                          'Height',
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),Column(
-                      children: [
-                       Text("$weight",style:const TextStyle(
-                           fontSize: 20,
-                           fontWeight: FontWeight.w600),),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        const Text(
-                          'Weight',
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          Icon(
+                            isMale
+                                ? FontAwesomeIcons.person
+                                : FontAwesomeIcons.personDress,
+                            size: 30,
+                            // color: Colors.purple,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            isMale ? "Male" : "Female",
+                            style: const TextStyle(
+                                color: Colors.grey,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                      ColumnItem(
+                        textValue: "Age",
+                        age: age,
+                        text: '$age',
+                      ),
+                      ColumnItem(
+                        height: height,
+                        text: "$height",
+                        textValue: "Height",
+                      ),
+                      ColumnItem(
+                        weight: weight,
+                        text: "$weight",
+                        textValue: "Weight",
+                      )
+                    ]),
               ),
             ),
             const SizedBox(
@@ -191,27 +162,11 @@ class BmiResultScreen extends StatelessWidget {
                       color: Colors.grey,
                     ),
                   ),
-                  child: RichWidget(result: result, status: status, range: range)),
+                  child:
+                      RichWidget(result: result, status: status, range: range)),
             ),
             const Spacer(),
-           ElevatedButton(
-             style: ElevatedButton.styleFrom(
-               fixedSize:const Size(double.infinity, 55),
-               foregroundColor: Colors.white,
-               backgroundColor: Colors.blue,
-               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-             ),
-               onPressed: (){
-                 Navigator.pop(context);
-               },
-               child: (
-                   const Row (
-                 mainAxisAlignment:MainAxisAlignment.center,
-                 children: [
-                   Text("TRY AGAIN",style: TextStyle(fontSize: 20),),
-                   Icon(Icons.refresh_outlined),
-                 ],
-               )))
+            const CustomButton()
           ],
         ),
       ),
@@ -234,44 +189,39 @@ class RichWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return RichText(
       text: TextSpan(
-        style:const  TextStyle(height: 2),
+        style: const TextStyle(height: 2),
         children: [
           const TextSpan(
               text: 'A BMI of  ',
-              style:
-                  TextStyle(color: Colors.black, fontSize: 18)),
+              style: TextStyle(color: Colors.black, fontSize: 18)),
           TextSpan(
               text: '$result',
-              style: const TextStyle(
-                  color: Colors.blue, fontSize: 18)),
+              style: const TextStyle(color: Colors.blue, fontSize: 18)),
           const TextSpan(
             text: ' indicates that your weight is in the ',
             style: TextStyle(color: Colors.black, fontSize: 18),
           ),
           TextSpan(
-              text:status,
-              style: const TextStyle(
-                  color: Colors.blue, fontSize: 18)),
+              text: status,
+              style: const TextStyle(color: Colors.blue, fontSize: 18)),
           const TextSpan(
             text: ' for person in your height',
             style: TextStyle(color: Colors.black, fontSize: 18),
           ),
           const TextSpan(
-            text: " A BMI between"
-            ,style: TextStyle(color: Colors.black, fontSize: 18),
-
+            text: " A BMI between",
+            style: TextStyle(color: Colors.black, fontSize: 18),
           ),
-           TextSpan(
-              text:(range),
-              style: const TextStyle(
-                  color: Colors.blue, fontSize: 18)),
+          TextSpan(
+              text: (range),
+              style: const TextStyle(color: Colors.blue, fontSize: 18)),
           const TextSpan(
-            text: " falls within the normal weight range Individuals within this range typically "
-            ,style: TextStyle(color: Colors.black, fontSize: 18),
+            text:
+                " falls within the normal weight range Individuals within this range typically ",
+            style: TextStyle(color: Colors.black, fontSize: 18),
           ),
         ],
       ),
     );
   }
 }
-

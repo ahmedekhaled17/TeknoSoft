@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
+
 class ContainerMale extends StatelessWidget {
   const ContainerMale({
     super.key,
-    required this.isMale, required this.icon, required this.text,
+    required this.isMale,
+    required this.icon,
+    required this.text,
   });
 
   final bool isMale;
   final String text;
   final IconData icon;
-
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,7 @@ class ContainerMale extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: isMale ? Colors.blue : Colors.grey[400],
       ),
-      child:  Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
@@ -29,8 +31,7 @@ class ContainerMale extends StatelessWidget {
           ),
           Text(
             text,
-            style: const TextStyle(
-                fontSize: 25, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
           ),
         ],
       ),
