@@ -1,4 +1,5 @@
 import 'package:bmi/view/bmi_screen.dart';
+import 'package:bmi/view/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class Bmi extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData.light(),
-      home: const BmiScreen(),
+      home: const SplashScreen(),
     );
   }
 }
